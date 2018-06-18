@@ -4,7 +4,7 @@ author:
 - "Zoe Meers" 
 - "twitter: https://twitter.com/zoe_meers"
 - "email: zoe.meers@sydney.edu.au"
-date: "June 20, 2018"
+date: "20 June, 2018"
 output: 
   ioslides_presentation:
     logo: template/ussc_logo.png
@@ -43,10 +43,15 @@ library(emo)
 
 
 - Currently working on the development version of the package
-  - We can plot several parliament "styles" ranging from the horseshoe parliament (like the one we have here!) or two opposing benches (like the in UK)
+  - ggparliament is not on CRAN (yet!)
+
+  - We can plot several parliament styles ranging from the horseshoe parliament (like the one we have here!) or two opposing benches (like the in UK)
+
+##
+
+  ![David Mulder Van der Vegt and Max Cohen de Lara, 2017, These 5 architectural designs influence every legislature in the world -- and tell you how each governs, March 4, The Washington Post](wapo.png){width=70%}
   
   
-- ggparliament is not on CRAN (yet!)
 
 ## Great...`r emo::ji("smile")` How can we use it?
 
@@ -64,12 +69,12 @@ library(emo)
 
 ## 
 ```{r}
-library(ggparliament)
-australia <- election_data %>%
-  filter(year == 2016 &
-           country == "Australia" &
-           house == "Representatives")
-head(australia)
+# library(ggparliament)
+# australia <- election_data %>% # the data we have included is in election_data
+#   filter(year == 2016 &  # filter for country, year, and legislative chamber
+#            country == "Australia" &
+#            house == "Representatives")
+# head(australia)
 ```
 ## Data munging
 - We want to expand the aggregated seats per party into a long list of individual seats and plot the location of each seat on the chart
@@ -81,24 +86,24 @@ head(australia)
 ##
 
 ```{r}
-# run your election results through parliament_data()
 # I am reordering the data to reflect the way the Australian parliament is structured (gov't on right, opposition on left) but this isn't strictly neccesary 
-australia <- australia[c(1, 5, 6, 7, 4, 3, 2), ]
-aus <- parliament_data(election_data = australia, # you need to specify the data frame
-                       total_seats = sum(australia$seats), # sum up the total amount of seats
-                       party_seats = australia$seats, # number of seats per party
-                       parl_rows = 4, # how many rows do we want?
-                       type = "horseshoe") # what type of parliament do we want?
-head(aus)
+# australia <- australia[c(1, 5, 6, 7, 4, 3, 2), ]
+# run your election results through parliament_data()
+# aus <- parliament_data(election_data = australia, # you need to specify the data frame
+#                        total_seats = sum(australia$seats), # sum up the total amount of seats
+#                        party_seats = australia$seats, # number of seats per party
+#                        parl_rows = 4, # how many rows do we want?
+#                        type = "horseshoe") # what type of parliament do we want?
+# head(aus)
 ```
 
 ## Now... The fun stuff `r emo::ji("smile")`
 ```{r}
-ggplot(aus, aes(x, y, colour=party_long)) + #define the data frame and how you want to colour the circles
-  geom_parliament_seats() + # this geom plots the seats
-  theme_parliament() + # we have created a theme for the package but this is optional
-  labs(colour = "", title = "Australia House of Representatives") +
-  scale_colour_manual(values = aus$colour, limits = aus$party_long)
+# ggplot(aus, aes(x, y, colour=party_long)) + #define the data frame and how you want to colour the circles
+#   geom_parliament_seats() + # this geom plots the seats
+#   theme_parliament() + # we have created a theme for the package but this is optional
+#   labs(colour = "", title = "Australia House of Representatives") +
+#   scale_colour_manual(values = aus$colour, limits = aus$party_long)
 ```
 ## Cool. What else?
 - We can highlight certain seats!
@@ -112,14 +117,14 @@ ggplot(aus, aes(x, y, colour=party_long)) + #define the data frame and how you w
 ## 
 
 ```{r}
-ggplot(aus, aes(x, y, colour=party_long)) +
-  geom_parliament_seats() +
-  theme_parliament() +
-  geom_highlight_government(government == 1) +
-  labs(colour = "", title = "Australia House of Representatives",
-  subtitle = "Government encircled in black.") +
-  annotate("text", x=0, y=0, label=paste("Total: 150 MPs"), fontface="bold", size=12) +
-  scale_colour_manual(values = aus$colour, limits = aus$party_long)
+# ggplot(aus, aes(x, y, colour=party_long)) +
+#   geom_parliament_seats() +
+#   theme_parliament() +
+#   geom_highlight_government(government == 1) +
+#   labs(colour = "", title = "Australia House of Representatives",
+#   subtitle = "Government encircled in black.") +
+#   annotate("text", x=0, y=0, label=paste("Total: 150 MPs"), fontface="bold", size=12) +
+#   scale_colour_manual(values = aus$colour, limits = aus$party_long)
 ```
 
 
