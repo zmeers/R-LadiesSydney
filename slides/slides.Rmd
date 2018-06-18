@@ -1,0 +1,123 @@
+---
+title: "ggparliament: Parliament Plots in the Tidyverse"
+author: 
+- "Zoe Meers" 
+- "twitter: https://twitter.com/zoe_meers"
+- "email: zoe.meers@sydney.edu.au"
+date: "June 20, 2018"
+output: 
+  ioslides_presentation:
+    logo: template/ussc_logo.png
+    template: template/ussc_ioslides.html
+    css: template/ussc_styles.css
+    widescreen: true
+    smaller: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ussc)
+library(tidyverse)
+library(emo)
+```
+
+
+## Uh... What are parliament plots? `r emo::ji("confused")`
+
+- They are visual representations of the composition of legislatures.
+
+
+- Parliament plots often display seats color-coded by party
+
+
+- This is one the first attempts at creating an `R` package for parliament plots
+
+## ggparliament
+- ggparliament was first started by Thomas Leeper
+
+
+- I, along with Rob Hickman, have taken over the package
+
+
+- The idea is that it creates `ggplot2` objects of parliamentary seats that integrate seamlessly with other `Tidyverse` packages
+
+
+- Currently working on the development version of the package
+  - We can plot several parliament "styles" ranging from the horseshoe parliament (like the one we have here!) or two opposing benches (like the in UK)
+  
+  
+- ggparliament is not on CRAN (yet!)
+
+## Great...`r emo::ji("smile")` How can we use it?
+
+- Start with aggregated election results. 
+
+
+- We have included data from several countries several in the package. 
+
+
+- For example, I will look at the Australian 2016 election.
+
+
+- The data frame looks like this ...
+
+
+## 
+```{r}
+# library(ggparliament)
+# australia <- election_data %>%
+#   filter(year == 2016 &
+#            country == "Australia" & 
+#            house == "Representatives")
+# head(australia)
+```
+## Data munging
+- We want to expand the aggregated seats per party into a long list of individual seats and plot the location of each seat on the chart
+
+
+- We have created a function -- `parliament_data()` -- that will do this for you!
+
+
+##
+
+```{r}
+# run your election results through parliament_data()
+# australia <- australia[c(1, 5, 6, 7, 4, 3, 2), ]
+# aus <- parliament_data(election_data = australia, # you need to specify the data frame
+#                        total_seats = sum(australia$seats), # sum up the total amount of seats
+#                        party_seats = australia$seats, # number of seats per party
+#                        parl_rows = 4, # how many rows do we want?
+#                        type = "horseshoe") # what type of parliament do we want?
+# head(aus)
+```
+
+## Now... The fun stuff `r emo::ji("smile")`
+```{r}
+# ggplot(aus, aes(x, y, colour=party_long)) + #define the data frame and how you want to colour the circles
+#   geom_parliament_seats() + # this geom plots the seats
+#   theme_parliament() + # we have created a theme for the package but this is optional
+#   labs(colour = "", title = "Australia House of Representatives") +
+#   scale_colour_manual(values = aus$colour, limits = aus$party_long)
+```
+## Cool. What else?
+- We can highlight certain seats!
+
+
+- This is a work in progress
+
+
+- We can add text to the plot designating the number of Representatives in the parliament
+
+## 
+
+```{r}
+ # ggplot(aus, aes(x, y, colour=party_long)) +
+ #   geom_parliament_seats() +
+ #   theme_parliament() +
+ #   geom_highlight_government(government == 1) +
+ #   labs(colour = "", title = "Australia House of Representatives",
+ #   subtitle = "Government encircled in black.") +
+ #   annotate("text", x=0, y=0, label=paste("Total: 150 MPs"), fontface="bold", size=12) +
+ #   scale_colour_manual(values = aus$colour, limits = aus$party_long)
+```
+
