@@ -49,7 +49,7 @@ library(tidyverse)
 
 
 - Currently working on the development version of the package
-  - ggparliament is not on CRAN (yet!)
+  - ggparliament is not on CRAN
 
   - We can plot several parliament styles ranging from the horseshoe parliament (like the one we have here!) or two opposing benches (like the in UK)
 
