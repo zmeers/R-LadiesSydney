@@ -136,7 +136,7 @@ ggplot(aus, aes(x, y, colour=party_long)) +
   geom_highlight_government(government == 1) +
   labs(colour = "", title = "Australia House of Representatives",
   subtitle = "Government encircled in black.") +
-  annotate("text", x=0, y=2, label=paste("Total: 150 MPs"), fontface="bold", size=12) +
+  annotate("text", x=0, y=1, label=paste("Total: 150 MPs"), fontface="bold", size=12) +
   scale_colour_manual(values = aus$colour, limits = aus$party_long)
 ```
 
