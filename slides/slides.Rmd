@@ -54,16 +54,16 @@ library(tidyverse)
 
 ##
 
-  ![David Mulder Van der Vegt and Max Cohen de Lara, 2017, These 5 architectural designs influence every legislature in the world -- and tell you how each governs, March 4, The Washington Post](wapo.png){width=70%}
+  ![David Mulder Van der Vegt and Max Cohen de Lara, 2017, These 5 architectural designs influence every legislature in the world -- and tell you how each governs, March 4, The Washington Post](wapo.png){width=50%}
   
   
 
 ## Great...`r emo::ji("smile")` How can we use it?
 
-- Start with aggregated election results. 
+- Start with aggregate election results. 
 
 
-- We have included data from several countries several in the package. 
+- We include data from several countries several in the package. 
 
 
 - For example, I will look at the Australian 2016 election.
@@ -138,5 +138,4 @@ ggplot(aus, aes(x, y, colour=party_long)) +
   annotate("text", x=0, y=2, label=paste("Total: 150 MPs"), fontface="bold", size=12) +
   scale_colour_manual(values = aus$colour, limits = aus$party_long)
 ```
-
 
