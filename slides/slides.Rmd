@@ -38,6 +38,7 @@ library(tidyverse)
 - This is one the first attempts at creating an `R` package for parliament plots
 
 ## ggparliament
+
 - ggparliament was first started by Thomas Leeper
 
 
@@ -138,4 +139,16 @@ ggplot(aus, aes(x, y, colour=party_long)) +
   annotate("text", x=0, y=2, label=paste("Total: 150 MPs"), fontface="bold", size=12) +
   scale_colour_manual(values = aus$colour, limits = aus$party_long)
 ```
+
+
+
+##
+
+### Thank you!
+
+#### Zoe Meers
+#### @zoe_meers
+#### zoe.meers@sydney.edu.au
+
+
 
